@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --main-color: #ff4d51;
+}
+
+
+/* utilities class */
+.bg-red {
+  background-color: var(--main-color)!important;
+}
+.text-red {
+  color: var(--main-color);
+}
+
+
+.navbar-nav li{
+   
+  margin: 0 12px;
+}
+
+.navbar-nav li a {
+  font-weight: 600;
+}
+
+
+
+
+/* hero section design  */
+
+
+#hero-section h2 {
+  
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 2px;
+word-spacing: 8px;
+
+}
