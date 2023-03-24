@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -48,4 +49,16 @@ code {
   letter-spacing: 2px;
 word-spacing: 8px;
 
+}
+
+
+/* top sellign design  */
+
+.category-btn {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+
+.category-btn::-webkit-scrollbar {
+  width: 0;
 }

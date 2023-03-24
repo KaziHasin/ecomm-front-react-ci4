@@ -1,27 +1,86 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
+import ProductList from './ProductList';
+import baseUrl from './baseUrl';
+
 
 export default function TopProducts() {
+  const [products, setProducts] = useState([]);
+  const [filterCategory, setFilterCategory] = useState('');
+  const [active, setActive] = useState('');
+
+    useEffect(() => {
+      
+        const getProduct = ()=>{
+            
+            fetch(`${baseUrl}products`)
+            .then(response => response.json())
+            .then(data => setProducts(data));
+
+           
+
+        }
+
+        getProduct();
+
+        
+    
+     
+    }, [])
+
+    let category = products.filter(
+      (value, index, array) => array.findIndex((t) => t.product_category === value.product_category) === index
+    );
+
+
+    const changeSingleProduct = (cate) => {
+
+      setFilterCategory(cate);
+      setActive(cate)
+
+    
+    }
+
+    const changeAllProduct = () => {
+
+      setFilterCategory('');
+      setActive('')
+     
+
+    } 
+
+    
+    
+   
+   
   return (
     <>
        
        <div className="section" id='top-product'>
            
-           <h2 className='section-heading my-5 text-center'>Top Products</h2>
+           
 
-           <div className="container">
-            <div className="row">
-                <div className="col-md-4 mt-3">
-                            <div className="card">
-            <img src="../images/ecomm-man-hero.png" className="card-img-top" alt="Product"/>
-            <div className="card-body border-top">
-                <h5 className="card-title text-center">Card title</h5>
+           <div className="container pt-2">
+
+           <h2 className='section-heading my-5 mb-3 text-center'>Top Products</h2>
+           <hr/>
+            
+            <div className='category-btn d-flex justify-content-center mb-3 mt-2 pt-4' >
+            <button className={`btn ${active === '' ? 'btn-dark' : 'btn-outline-dark'} mx-3 `} onClick={changeAllProduct}>All</button>
+               
+               {category.map(category => 
                 
-               <p className='text-center mt-5 mb-0'> <a href="#" className="btn btn-dark">Shop Now</a></p>
+                  <button className={`btn ${active === category.product_category ? 'btn-dark' : 'btn-outline-dark'} mx-3 `} onClick={() =>changeSingleProduct(category.product_category)} key={category.product_category}>{category.product_category}</button>  
+                )}
+
+              
+
             </div>
-            </div>  
-                        
-                </div>
+
+            <div className="row">
+
+              <ProductList category={filterCategory}/>
                 
+                  
             </div>
            </div>
 
